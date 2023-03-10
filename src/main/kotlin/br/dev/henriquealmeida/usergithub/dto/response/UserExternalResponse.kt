@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.Hidden
 
 @Hidden
 data class UserExternalResponse(
-    val userName: String,
-    val avatarUrl: String,
-    val userProfileName: String,
-    val startGitHubDate: String,
-    val urlProfile: String
+    val login: String,
+    val name: String,
+    val avatar_url: String,
+    val html_url: String,
+    val created_at: String
 )

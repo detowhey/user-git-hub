@@ -5,17 +5,34 @@ import br.dev.henriquealmeida.usergithub.domain.UserProfile
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.time.DateTimeException
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 @Service
 class UserProfileService(@Autowired private val gitHubClient: GitHubClient) {
 
     private val logger = LoggerFactory.getLogger(UserProfileService::class.java)
 
-    fun getUserGitHub(nameUser: String): UserProfile {
-        return gitHubClient.getUserGithub(nameUser).let {
-            UserProfile(it.userName, it.avatarUrl, it.userProfileName, it.startGitHubDate, it.urlProfile)
+    fun getUserGitHub(userName: String): UserProfile {
+        return gitHubClient.getUserGithub(userName).let {
+            UserProfile(
+                it.login,
+                it.avatar_url,
+                it.name,
+                applyDateFormat(it.created_at),
+                it.html_url
+            )
         }.also {
-            logger.info("Searching user in GitHub")
+            logger.info("Searching user $userName in GitHub")
+        }
+    }
+
+    private fun applyDateFormat(dateValue: String, pattern: String = "dd/MM/yyyy HH:mm"): String {
+        try {
+            return OffsetDateTime.parse(dateValue).format(DateTimeFormatter.ofPattern(pattern))
+        } catch (e: DateTimeException) {
+            throw DateTimeException("Date format is invalid")
         }
     }
 }

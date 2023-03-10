@@ -1,9 +1,9 @@
 package br.dev.henriquealmeida.usergithub.dto.response
 
 data class UserProfileResponse(
-    val userName: String,
+    val login: String,
+    val profileName: String,
     val avatarUrl: String,
-    val userProfileName: String,
-    val startGitHubDate: String,
-    val urlProfile: String
+    val urlProfile: String,
+    val createDate: String
 )

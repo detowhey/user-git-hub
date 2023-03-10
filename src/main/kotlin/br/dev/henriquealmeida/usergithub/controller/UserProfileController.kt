@@ -13,10 +13,20 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(value = ["api/\${api.version}/user"], produces = [MediaType.APPLICATION_JSON_VALUE])
-class UserProfileController (@Autowired private val userProfileService: UserProfileService) {
+class UserProfileController(@Autowired private val userProfileService: UserProfileService) {
 
     @GetMapping(value = ["/{userName}"])
-    fun getUserProfile(@PathVariable userName:String): ResponseEntity<UserProfileResponse> {
-        return ResponseEntity.ok().body(UserProfileResponse())
+    fun getUserProfile(@PathVariable userName: String): ResponseEntity<UserProfileResponse> {
+        return userProfileService.getUserGitHub(userName).let {
+            ResponseEntity.ok().body(
+                UserProfileResponse(
+                    login = it.userName,
+                    avatarUrl = it.avatarUrl,
+                    profileName = it.userProfileName,
+                    createDate = it.startGitHubDate,
+                    urlProfile = it.urlProfile
+                )
+            )
+        }
     }
 }

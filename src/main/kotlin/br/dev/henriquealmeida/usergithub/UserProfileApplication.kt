@@ -6,8 +6,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients
 
 @SpringBootApplication
 @EnableFeignClients
-class UserGitHubApplication
+class UserProfileApplication
 
 fun main(args: Array<String>) {
-	runApplication<UserGitHubApplication>(*args)
+	runApplication<UserProfileApplication>(*args)
 }
