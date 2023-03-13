@@ -25,7 +25,7 @@ class ResourceExceptionHandler {
 
     @ExceptionHandler(FeignException.NotFound::class)
     fun sendErrorFeignCliente(
-        exception: FeignException.FeignServerException,
+        exception: FeignException.NotFound,
         request: HttpServletRequest
     ): ResponseEntity<StandardErrorResponse> =
         buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "Client GitHub not found")
