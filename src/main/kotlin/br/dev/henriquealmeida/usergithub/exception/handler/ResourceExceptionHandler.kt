@@ -1,6 +1,7 @@
 package br.dev.henriquealmeida.usergithub.exception.handler
 
 import br.dev.henriquealmeida.usergithub.exception.InvalidDateException
+import br.dev.henriquealmeida.usergithub.exception.UserNotFoundException
 import br.dev.henriquealmeida.usergithub.exception.error.StandardErrorResponse
 import feign.FeignException
 import org.slf4j.LoggerFactory
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.servlet.NoHandlerFoundException
 import java.time.Instant
 import javax.servlet.http.HttpServletRequest
 
@@ -29,6 +31,20 @@ class ResourceExceptionHandler {
         request: HttpServletRequest
     ): ResponseEntity<StandardErrorResponse> =
         buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "Client GitHub not found")
+
+    @ExceptionHandler(NoHandlerFoundException::class)
+    fun sendDefaultError(
+        exception: NoHandlerFoundException,
+        request: HttpServletRequest
+    ): ResponseEntity<StandardErrorResponse> =
+        buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "Resource not found")
+
+    @ExceptionHandler(UserNotFoundException::class)
+    fun sendUserNotFoundExeception(
+        exception: UserNotFoundException,
+        request: HttpServletRequest
+    ): ResponseEntity<StandardErrorResponse> =
+        buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "User not found")
 
 
     private fun buildResponseErrorEntity(
