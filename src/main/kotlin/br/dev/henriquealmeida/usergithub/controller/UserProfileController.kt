@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Tag(name = "User profile", description = "Endpoint that integrates with the github public api")
+@Tag(name = "User profile", description = "Endpoint that integrates with the github public API")
 @RestController
 @RequestMapping(value = ["api/\${api.version}/user"], produces = [MediaType.APPLICATION_JSON_VALUE])
 class UserProfileController(@Autowired private val userProfileService: UserProfileService) {
