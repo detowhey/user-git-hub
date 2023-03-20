@@ -5,7 +5,7 @@ import java.time.Instant
 
 data class StandardErrorResponse(
     @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", timezone = "UTC")
-    val timeStamp: Instant,
+    val timeStamp: Instant = Instant.now(),
     val statusCode: Int,
     val error: String,
     val message: String?,

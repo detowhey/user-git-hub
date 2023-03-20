@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.servlet.NoHandlerFoundException
-import java.time.Instant
 import javax.servlet.http.HttpServletRequest
 
 @ControllerAdvice
@@ -54,11 +53,10 @@ class ResourceExceptionHandler {
         messageError: String
     ): ResponseEntity<StandardErrorResponse> {
         return StandardErrorResponse(
-            Instant.now(),
-            httpStatus.value(),
-            messageError,
-            exception.message,
-            request.requestURI
+            statusCode = httpStatus.value(),
+            error = messageError,
+            message = exception.message,
+            path = request.requestURI
         ).let {
             ResponseEntity.status(httpStatus).body(it)
         }.also {
