@@ -7,12 +7,13 @@ import feign.FeignException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.client.HttpServerErrorException.InternalServerError
 import org.springframework.web.servlet.NoHandlerFoundException
 import javax.servlet.http.HttpServletRequest
 
-@ControllerAdvice
+@RestControllerAdvice
 class ResourceExceptionHandler {
 
     private val logger = LoggerFactory.getLogger(ResourceExceptionHandler::class.java)
@@ -31,6 +32,13 @@ class ResourceExceptionHandler {
     ): ResponseEntity<StandardErrorResponse> =
         buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "Client GitHub not found")
 
+    @ExceptionHandler(FeignException.InternalServerError::class)
+    fun sendFeignInternalServerError(
+        exception: FeignException.InternalServerError,
+        request: HttpServletRequest
+    ): ResponseEntity<StandardErrorResponse> =
+        buildResponseErrorEntity(HttpStatus.INTERNAL_SERVER_ERROR, exception, request, "Feign client internal server error")
+
     @ExceptionHandler(NoHandlerFoundException::class)
     fun sendDefaultError(
         exception: NoHandlerFoundException,
@@ -45,6 +53,12 @@ class ResourceExceptionHandler {
     ): ResponseEntity<StandardErrorResponse> =
         buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "User not found")
 
+    @ExceptionHandler(InternalServerError::class)
+    fun sendInternalServerError(
+        exception: InternalServerError,
+        request: HttpServletRequest
+    ): ResponseEntity<StandardErrorResponse> =
+        buildResponseErrorEntity(HttpStatus.INTERNAL_SERVER_ERROR, exception, request, "Internal server error")
 
     private fun buildResponseErrorEntity(
         httpStatus: HttpStatus,
