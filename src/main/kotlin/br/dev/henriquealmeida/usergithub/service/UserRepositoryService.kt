@@ -4,6 +4,7 @@ import br.dev.henriquealmeida.usergithub.client.GitHubClient
 import br.dev.henriquealmeida.usergithub.domain.UserRepository
 import br.dev.henriquealmeida.usergithub.exception.InvalidDateException
 import br.dev.henriquealmeida.usergithub.exception.UserNotFoundException
+import br.dev.henriquealmeida.usergithub.util.applyDateFormat
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -23,7 +24,7 @@ class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
                         it.name,
                         it.html_url,
                         it.description,
-                        applyDateFormat(it.created_at),
+                        it.created_at.applyDateFormat(),
                         it.language
                     )
                 }
@@ -32,14 +33,6 @@ class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
             }
         } catch (exception: UserNotFoundException) {
             throw exception
-        }
-    }
-
-    private fun applyDateFormat(dateValue: String, pattern: String = "dd/MM/yyyy HH:mm"): String {
-        try {
-            return OffsetDateTime.parse(dateValue).format(DateTimeFormatter.ofPattern(pattern))
-        } catch (e: InvalidDateException) {
-            throw InvalidDateException()
         }
     }
 }
