@@ -5,6 +5,7 @@ import br.dev.henriquealmeida.usergithub.dto.response.UserRepositoryResponse
 import br.dev.henriquealmeida.usergithub.service.UserProfileService
 import br.dev.henriquealmeida.usergithub.service.UserRepositoryService
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -47,6 +48,13 @@ class UserProfileController(
         }
     }
 
+    @Operation(
+        summary = "Search repositories for user on GitHub", responses = [ApiResponse(
+            responseCode = "200",
+            description = "Success finding the repositories",
+            content = [Content(array = ArraySchema(schema = Schema(implementation = UserRepositoryResponse::class)))]
+        )]
+    )
     @GetMapping(value = ["/{userName}/repos"])
     fun getListUserRepositories(@PathVariable userName: String): ResponseEntity<List<UserRepositoryResponse>> {
         return userRepositoryService.getListUserRepositories(userName).map {
