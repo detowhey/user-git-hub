@@ -2,6 +2,7 @@ package br.dev.henriquealmeida.usergithub.dto.response
 
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(name = "UserProfile", description = "User data")
 data class UserProfileResponse(
     @field:Schema(description = "GitHub user login", example = "detowhey")
     val login: String,
