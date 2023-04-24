@@ -1,5 +1,6 @@
 package br.dev.henriquealmeida.usergithub.client
 
+import br.dev.henriquealmeida.usergithub.dto.response.UserRepositoryExternalResponse
 import br.dev.henriquealmeida.usergithub.dto.response.UserExternalResponse
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.MediaType
@@ -11,4 +12,7 @@ interface GitHubClient {
 
     @GetMapping(value = ["/users/{userName}"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun getUserGithub(@PathVariable("userName") userName: String): UserExternalResponse
+
+    @GetMapping(value = ["/users/{userName}/repos"], consumes = [MediaType.APPLICATION_JSON_VALUE])
+    fun getRepositoriesGitHub(@PathVariable("userName") userName: String): List<UserRepositoryExternalResponse>
 }

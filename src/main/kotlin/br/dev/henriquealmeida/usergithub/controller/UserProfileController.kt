@@ -1,7 +1,9 @@
 package br.dev.henriquealmeida.usergithub.controller
 
 import br.dev.henriquealmeida.usergithub.dto.response.UserProfileResponse
+import br.dev.henriquealmeida.usergithub.dto.response.UserRepositoryResponse
 import br.dev.henriquealmeida.usergithub.service.UserProfileService
+import br.dev.henriquealmeida.usergithub.service.UserRepositoryService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
@@ -18,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController
 @Tag(name = "User profile", description = "Endpoint that integrates with the github public API")
 @RestController
 @RequestMapping(value = ["api/\${api.version}/user"], produces = [MediaType.APPLICATION_JSON_VALUE])
-class UserProfileController(@Autowired private val userProfileService: UserProfileService) {
+class UserProfileController(
+    @Autowired private val userProfileService: UserProfileService,
+    @Autowired private val userRepositoryService: UserRepositoryService
+) {
 
     @Operation(
         summary = "Search user profile on GitHub", responses = [ApiResponse(
@@ -39,6 +44,21 @@ class UserProfileController(@Autowired private val userProfileService: UserProfi
                     urlProfile = it.urlProfile
                 )
             )
+        }
+    }
+
+    @GetMapping(value = ["/{userName}/repos"])
+    fun getListUserRepositories(@PathVariable userName: String): ResponseEntity<List<UserRepositoryResponse>> {
+        return userRepositoryService.getListUserRepositories(userName).map {
+            UserRepositoryResponse(
+                it.name,
+                it.htmlUrl,
+                it.description,
+                it.createdAt,
+                it.language
+            )
+        }.let {
+            ResponseEntity.ok(it)
         }
     }
 }
