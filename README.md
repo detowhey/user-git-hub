@@ -22,10 +22,11 @@
     "profileName": "Henrique Almeida",
     "avatarUrl": "https://avatars.githubusercontent.com/u/56054329?v=4",
     "urlProfile": "https://github.com/detowhey",
-    "createDate": "02/10/2019 00:34"
+    "createDate": "02/10/2019 00:34",
+    "numberPublicRepos": 16
 }
 ```
-Fetch user data from GitHub according to your login
+Fetch user data from GitHub according to your login.
 
 
 ### Running the application
