@@ -64,7 +64,9 @@ class UserProfileController(
                 it.htmlUrl,
                 it.description,
                 it.createdAt,
-                it.language
+                it.language,
+                it.size,
+                it.urlGit
             )
         }.let {
             ResponseEntity.ok(it)

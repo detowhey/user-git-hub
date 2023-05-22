@@ -5,5 +5,7 @@ data class UserRepository(
     val htmlUrl: String,
     val description: String?,
     val createdAt: String,
-    val language: String?
+    val language: String?,
+    val size: Long,
+    val urlGit: UrlGitRepository
 )

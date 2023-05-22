@@ -25,7 +25,7 @@ class UserProfileService(@Autowired private val gitHubClient: GitHubClient) {
                     it.public_repos
                 )
             }.also {
-                logger.info("Searching user $userName in GitHub, $it")
+                logger.info("Searching user $userName in GitHub.")
             }
         } catch (exception: UserNotFoundException) {
             throw exception

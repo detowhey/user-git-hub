@@ -1,6 +1,7 @@
 package br.dev.henriquealmeida.usergithub.service
 
 import br.dev.henriquealmeida.usergithub.client.GitHubClient
+import br.dev.henriquealmeida.usergithub.domain.UrlGitRepository
 import br.dev.henriquealmeida.usergithub.domain.UserRepository
 import br.dev.henriquealmeida.usergithub.exception.UserNotFoundException
 import br.dev.henriquealmeida.usergithub.util.applyDateFormat
@@ -22,7 +23,9 @@ class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
                         it.html_url,
                         it.description,
                         it.created_at.applyDateFormat(),
-                        it.language
+                        it.language,
+                        it.size,
+                        UrlGitRepository(it.git_url, it.ssh_url, it.clone_url)
                     )
                 }
             }.also {
