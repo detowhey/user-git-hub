@@ -5,5 +5,6 @@ data class UserProfile(
     val avatarUrl: String,
     val userProfileName: String,
     val startGitHubDate: String,
-    val urlProfile: String
+    val urlProfile: String,
+    val numberPublicRepos: Long,
 )

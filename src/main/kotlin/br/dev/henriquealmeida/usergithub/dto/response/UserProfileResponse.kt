@@ -13,5 +13,7 @@ data class UserProfileResponse(
     @field:Schema(description = "GitHub user profile URL", example = "https://github.com/example")
     val urlProfile: String,
     @field:Schema(description = "GitHub user create date profile", pattern = "dd/MM/yyyy HH:mm", example = "10/02/2020 14:21")
-    val createDate: String
+    val createDate: String,
+    @field:Schema(description = "GitHub user number of public repositories ", example = "5", type = "Number")
+    val numberPublicRepos: Long
 )

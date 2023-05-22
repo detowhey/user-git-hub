@@ -21,7 +21,8 @@ class UserProfileService(@Autowired private val gitHubClient: GitHubClient) {
                     it.avatar_url,
                     it.name,
                     it.created_at.applyDateFormat(),
-                    it.html_url
+                    it.html_url,
+                    it.public_repos
                 )
             }.also {
                 logger.info("Searching user $userName in GitHub, $it")

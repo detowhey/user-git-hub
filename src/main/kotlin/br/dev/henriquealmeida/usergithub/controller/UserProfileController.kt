@@ -42,7 +42,8 @@ class UserProfileController(
                     avatarUrl = it.avatarUrl,
                     profileName = it.userProfileName,
                     createDate = it.startGitHubDate,
-                    urlProfile = it.urlProfile
+                    urlProfile = it.urlProfile,
+                    numberPublicRepos = it.numberPublicRepos
                 )
             )
         }
