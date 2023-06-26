@@ -8,6 +8,6 @@ fun String.applyDateFormat(pattern: String = "dd/MM/yyyy HH:mm"): String {
     try {
         return OffsetDateTime.parse(this).format(DateTimeFormatter.ofPattern(pattern))
     } catch (e: Exception) {
-        throw InvalidDateException(e)
+        throw InvalidDateException(cause = e.cause)
     }
 }

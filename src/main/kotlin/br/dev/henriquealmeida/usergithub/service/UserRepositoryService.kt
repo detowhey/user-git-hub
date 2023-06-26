@@ -34,8 +34,8 @@ class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
             }.also {
                 logger.info("Searching repositories, for user $userName, in GitHub.")
             }
-        } catch (exception: UserNotFoundException) {
-            throw exception
+        } catch (exception: Exception) {
+            throw UserNotFoundException(cause = exception.cause)
         }
     }
 }

@@ -8,6 +8,6 @@ fun String.parseToLocalDateTime(pattern: String = "dd/MM/yyyy HH:mm"): LocalDate
     try {
         return LocalDateTime.parse(this, DateTimeFormatter.ofPattern(pattern))
     } catch (e: Exception) {
-        throw InvalidDateException(e)
+        throw InvalidDateException(cause = e.cause)
     }
 }
