@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 fun String.parseToLocalDateTime(pattern: String = "dd/MM/yyyy HH:mm"): LocalDateTime {
     try {
         return LocalDateTime.parse(this, DateTimeFormatter.ofPattern(pattern))
-    } catch (e: InvalidDateException) {
-        throw InvalidDateException()
+    } catch (e: Exception) {
+        throw InvalidDateException(e)
     }
 }
