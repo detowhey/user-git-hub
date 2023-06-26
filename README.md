@@ -36,7 +36,7 @@ Fetch user data from GitHub according to your login.
 
 #### Application up
 ```
-gradlew bootRun
+gradle bootRun
 ```
 
 ### URL
@@ -49,4 +49,4 @@ http://localhost:8080/swagger-ui/index.html
 
 #### Important
 
-To use the Kotlin programming language, you need to have the JDK (Java Development Kit) installed. For this application, [JDK 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html) is used.
+To use the Kotlin programming language, you need to have the JDK (Java Development Kit) installed. For this application, [JDK 17](https://www.oracle.com/br/java/technologies/downloads/#java17) is used.
