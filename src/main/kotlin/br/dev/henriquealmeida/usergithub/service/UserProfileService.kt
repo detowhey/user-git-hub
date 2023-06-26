@@ -18,11 +18,11 @@ class UserProfileService(@Autowired private val gitHubClient: GitHubClient) {
             return gitHubClient.getUserGithub(userName).let {
                 UserProfile(
                     it.login,
-                    it.avatar_url,
+                    it.avatarUrl,
                     it.name,
-                    it.created_at.applyDateFormat(),
-                    it.html_url,
-                    it.public_repos
+                    it.createdAt.applyDateFormat(),
+                    it.htmlUrl,
+                    it.publicRepos
                 )
             }.also {
                 logger.info("Searching user $userName in GitHub.")
