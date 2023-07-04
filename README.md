@@ -13,7 +13,6 @@
 - [Spring Boot (2.7.5)](https://spring.io/projects/spring-boot)
 - [JUnit5](https://junit.org/junit5/docs/current/user-guide/), [Mockito](https://site.mockito.org/), [Datafaker](https://www.datafaker.net/)
 - [Swagger (openapi v1.6.14)](https://springdoc.org/)
-- [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/)
 
 ### Service response example (API)
 ```
