@@ -1,6 +1,6 @@
 # User GitHub
 
-## Service that integrates with GitHub API
+## Service that integrates with [GitHub API](https://docs.github.com/en/rest)
 
 ### Functionalities:
 
