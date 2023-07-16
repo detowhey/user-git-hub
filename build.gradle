@@ -16,10 +16,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.5'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.1.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.8'
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.5'
-    implementation 'org.springframework.boot:spring-boot-starter-amqp:2.7.5'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
@@ -34,7 +33,7 @@ dependencies {
 tasks.withType(KotlinCompile) {
     kotlinOptions {
         freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = '11'
+        jvmTarget = '17'
     }
 }
 

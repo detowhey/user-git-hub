@@ -14,13 +14,8 @@ class OpenApiConfig {
 
     @Bean
     fun customOpenApi(@Value("\${api.version}") appVersion: String): OpenAPI {
-        return OpenAPI().info(
-                Info().title("GitHub user").description("Fetch GitHub user").version(appVersion)
-            ).servers(
-                listOf(
-                    Server().url("http://localhost:8080").description("URL Service")
-                )
-            )
+        return OpenAPI().info(Info().title("GitHub user").description("Fetch GitHub user").version(appVersion))
+            .servers(listOf(Server().url("http://localhost:8080").description("URL Service")))
     }
 
     @Bean
