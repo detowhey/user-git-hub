@@ -4,6 +4,7 @@ import br.dev.henriquealmeida.usergithub.exception.InvalidDateException
 import br.dev.henriquealmeida.usergithub.exception.UserNotFoundException
 import br.dev.henriquealmeida.usergithub.exception.error.StandardErrorResponse
 import feign.FeignException
+import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.client.HttpServerErrorException.InternalServerError
 import org.springframework.web.servlet.NoHandlerFoundException
-import javax.servlet.http.HttpServletRequest
 
 @RestControllerAdvice
 class ResourceExceptionHandler {
@@ -51,7 +51,7 @@ class ResourceExceptionHandler {
         exception: UserNotFoundException,
         request: HttpServletRequest
     ): ResponseEntity<StandardErrorResponse> =
-        buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "User not found")
+        buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "Not found")
 
     @ExceptionHandler(InternalServerError::class)
     fun sendInternalServerError(
@@ -64,11 +64,11 @@ class ResourceExceptionHandler {
         httpStatus: HttpStatus,
         exception: Exception,
         request: HttpServletRequest,
-        messageError: String
+        error: String
     ): ResponseEntity<StandardErrorResponse> {
         return StandardErrorResponse(
             statusCode = httpStatus.value(),
-            error = messageError,
+            error = error,
             message = exception.message,
             path = request.requestURI
         ).let {

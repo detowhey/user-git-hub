@@ -10,6 +10,7 @@ import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CharacterEncodingFilter
 import org.springframework.web.filter.CorsFilter
+import java.nio.charset.StandardCharsets
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Configuration
@@ -20,7 +21,7 @@ class CorsConfigurationGlobal {
         val config = CorsConfiguration().apply {
             this.allowCredentials = true
             this.allowedOriginPatterns = listOf(CorsConfiguration.ALL)
-            this.allowedMethods = listOf(HttpMethod.GET.name)
+            this.allowedMethods = listOf(HttpMethod.GET.name())
             this.allowedHeaders = listOf("Requestor-Type")
             this.maxAge = 300L
         }
@@ -39,7 +40,7 @@ class CorsConfigurationGlobal {
     @Bean
     fun characterEncodingFilterRegistration(): FilterRegistrationBean<CharacterEncodingFilter>? {
         val characterFilter = CharacterEncodingFilter().apply {
-            this.encoding = "UTF-8"
+            this.encoding = StandardCharsets.UTF_8.name()
             this.setForceEncoding(true)
         }
 
