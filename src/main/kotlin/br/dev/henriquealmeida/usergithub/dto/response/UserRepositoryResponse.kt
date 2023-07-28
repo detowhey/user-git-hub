@@ -1,7 +1,6 @@
 package br.dev.henriquealmeida.usergithub.dto.response
 
 import br.dev.henriquealmeida.usergithub.domain.UrlGitRepository
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.swagger.v3.oas.annotations.media.Schema
 
