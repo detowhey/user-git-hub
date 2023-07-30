@@ -33,7 +33,7 @@ class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
                 )
             }
 
-            val pageRequest = PageRequest.of(0, 20)
+            val pageRequest = PageRequest.of(pageable.pageNumber, pageable.pageSize, pageable.sort)
             val start = pageRequest.offset.toInt()
             val end = (start + pageRequest.pageSize).coerceAtMost(listRepository.size)
             var listOutput = listOf<UserRepository>()
@@ -42,9 +42,10 @@ class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
                 listOutput = listRepository.subList(start, end)
 
             return PageImpl(listOutput, pageRequest, listRepository.size.toLong()).also {
-                logger.info("Searching repositories, for user $userName, in GitHub.")
+                logger.info("Searching repositories, for user '$userName', in GitHub.")
             }
         } catch (exception: Exception) {
+            logger.error("Service error with '$userName'", exception)
             throw UserNotFoundException(cause = exception.cause)
         }
     }
