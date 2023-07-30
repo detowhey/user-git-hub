@@ -5,7 +5,6 @@ import br.dev.henriquealmeida.usergithub.domain.UrlGitRepository
 import br.dev.henriquealmeida.usergithub.domain.UserRepository
 import br.dev.henriquealmeida.usergithub.exception.UserNotFoundException
 import br.dev.henriquealmeida.usergithub.util.applyDateFormat
-import br.dev.henriquealmeida.usergithub.util.parseToLocalDateTime
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -34,18 +33,18 @@ class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
             }
 
             val pageRequest = PageRequest.of(pageable.pageNumber, pageable.pageSize, pageable.sort)
-            val start = pageRequest.offset.toInt()
-            val end = (start + pageRequest.pageSize).coerceAtMost(listRepository.size)
+            val startSize = pageRequest.offset.toInt()
+            val endSize = (startSize + pageRequest.pageSize).coerceAtMost(listRepository.size)
             var listOutput = listOf<UserRepository>()
 
-            if (start <= end)
-                listOutput = listRepository.subList(start, end)
+            if (startSize <= endSize)
+                listOutput = listRepository.subList(startSize, endSize)
 
             return PageImpl(listOutput, pageRequest, listRepository.size.toLong()).also {
                 logger.info("Searching repositories, for user '$userName', in GitHub.")
             }
         } catch (exception: Exception) {
-            logger.error("Service error with '$userName'", exception)
+            logger.error("Service error with '$userName'\n${exception.message}", exception)
             throw UserNotFoundException(cause = exception.cause)
         }
     }

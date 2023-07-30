@@ -26,7 +26,7 @@ class ResourceExceptionHandler {
         buildResponseErrorEntity(HttpStatus.BAD_REQUEST, exception, request, "Invalid date")
 
     @ExceptionHandler(FeignException.NotFound::class)
-    fun sendErrorFeignCliente(
+    fun sendErrorFeignClient(
         exception: FeignException.NotFound,
         request: HttpServletRequest
     ): ResponseEntity<StandardErrorResponse> =
@@ -47,7 +47,7 @@ class ResourceExceptionHandler {
         buildResponseErrorEntity(HttpStatus.NOT_FOUND, exception, request, "Resource not found")
 
     @ExceptionHandler(UserNotFoundException::class)
-    fun sendUserNotFoundExeception(
+    fun sendUserNotFoundException(
         exception: UserNotFoundException,
         request: HttpServletRequest
     ): ResponseEntity<StandardErrorResponse> =
