@@ -11,8 +11,6 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -59,8 +57,8 @@ class UserProfileController(
         )]
     )
     @GetMapping(value = ["/{userName}/repos"])
-    fun getListUserRepositories(@PathVariable userName: String, pageable: Pageable): ResponseEntity<Page<UserRepositoryResponse>> {
-        return userRepositoryService.getListUserRepositories(userName, pageable).map {
+    fun getListUserRepositories(@PathVariable userName: String): ResponseEntity<List<UserRepositoryResponse>> {
+        return userRepositoryService.getListUserRepositories(userName).map {
             UserRepositoryResponse(
                 it.name,
                 it.htmlUrl,
