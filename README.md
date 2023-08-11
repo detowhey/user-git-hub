@@ -10,7 +10,7 @@
 ### Technologies, frameworks and libraries used
 - [Kotlin 1.7.22](https://kotlinlang.org/docs/home.html)
 - [Gradle 7.0+](https://docs.gradle.org/7.0/userguide/userguide.html)
-- [Spring Boot (2.7.5)](https://spring.io/projects/spring-boot)
+- [Spring Boot (3.1.1)](https://spring.io/projects/spring-boot)
 - [JUnit5](https://junit.org/junit5/docs/current/user-guide/), [Mockito](https://site.mockito.org/), [Datafaker](https://www.datafaker.net/)
 - [Swagger (openapi v1.6.14)](https://springdoc.org/)
 
