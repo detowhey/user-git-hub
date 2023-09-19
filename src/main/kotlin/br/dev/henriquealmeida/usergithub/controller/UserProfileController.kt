@@ -27,7 +27,8 @@ class UserProfileController(
 ) {
 
     @Operation(
-        summary = "Search user profile on GitHub", responses = [ApiResponse(
+        summary = "Search user profile on GitHub",
+        responses = [ApiResponse(
             responseCode = "200",
             description = "Successfully found a user profile",
             content = [Content(schema = Schema(implementation = UserProfileResponse::class))]
@@ -50,7 +51,8 @@ class UserProfileController(
     }
 
     @Operation(
-        summary = "Search repositories for user on GitHub", responses = [ApiResponse(
+        summary = "Search repositories for user on GitHub",
+        responses = [ApiResponse(
             responseCode = "200",
             description = "Success finding the repositories",
             content = [Content(array = ArraySchema(schema = Schema(implementation = UserRepositoryResponse::class)))]

@@ -49,6 +49,6 @@ class CorsConfigurationGlobal {
             this.addUrlPatterns("/*")
         }
 
-        return encodingBean;
+        return encodingBean
     }
 }
