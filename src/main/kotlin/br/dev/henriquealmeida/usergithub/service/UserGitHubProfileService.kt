@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class UserProfileService(@Autowired private val gitHubClient: GitHubClient) {
+class UserGitHubProfileService(@Autowired private val gitHubClient: GitHubClient) {
 
-    private val logger = LoggerFactory.getLogger(UserProfileService::class.java)
+    private val logger = LoggerFactory.getLogger(UserGitHubProfileService::class.java)
 
     fun getUserGitHub(userName: String): UserProfile {
         try {

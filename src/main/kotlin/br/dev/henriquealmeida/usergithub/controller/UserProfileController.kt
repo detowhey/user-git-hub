@@ -2,8 +2,8 @@ package br.dev.henriquealmeida.usergithub.controller
 
 import br.dev.henriquealmeida.usergithub.dto.response.UserProfileResponse
 import br.dev.henriquealmeida.usergithub.dto.response.UserRepositoryResponse
-import br.dev.henriquealmeida.usergithub.service.UserProfileService
-import br.dev.henriquealmeida.usergithub.service.UserRepositoryService
+import br.dev.henriquealmeida.usergithub.service.UserGitHubProfileService
+import br.dev.henriquealmeida.usergithub.service.UserGitHubRepositoryService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
 import io.swagger.v3.oas.annotations.media.Content
@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(value = ["api/\${api.version}/user"], produces = [MediaType.APPLICATION_JSON_VALUE])
 class UserProfileController(
-    @Autowired private val userProfileService: UserProfileService,
-    @Autowired private val userRepositoryService: UserRepositoryService
+        @Autowired private val userGitHubProfileService: UserGitHubProfileService,
+        @Autowired private val userGitHubRepositoryService: UserGitHubRepositoryService
 ) {
 
     @Operation(
@@ -36,7 +36,7 @@ class UserProfileController(
     )
     @GetMapping(value = ["/{userName}"])
     fun getUserProfile(@PathVariable userName: String): ResponseEntity<UserProfileResponse> {
-        return userProfileService.getUserGitHub(userName).let {
+        return userGitHubProfileService.getUserGitHub(userName).let {
             ResponseEntity.ok().body(
                 UserProfileResponse(
                     login = it.userName,
@@ -60,7 +60,7 @@ class UserProfileController(
     )
     @GetMapping(value = ["/{userName}/repos"])
     fun getListUserRepositories(@PathVariable userName: String): ResponseEntity<List<UserRepositoryResponse>> {
-        return userRepositoryService.getListUserRepositories(userName).map {
+        return userGitHubRepositoryService.getListUserRepositories(userName).map {
             UserRepositoryResponse(
                 it.name,
                 it.htmlUrl,

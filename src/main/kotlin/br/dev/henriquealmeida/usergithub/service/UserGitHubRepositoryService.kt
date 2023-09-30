@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class UserRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
+class UserGitHubRepositoryService(@Autowired private val gitHubClient: GitHubClient) {
 
-    private val logger = LoggerFactory.getLogger(UserRepositoryService::class.java)
+    private val logger = LoggerFactory.getLogger(UserGitHubRepositoryService::class.java)
 
     fun getListUserRepositories(userName: String): List<UserRepository> {
         try {
